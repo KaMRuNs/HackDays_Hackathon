@@ -3,7 +3,7 @@ import json, os, sys, time
 import httpx
 
 URL = os.getenv("OLLAMA_URL", "http://localhost:11434")
-MODEL = sys.argv[1] if len(sys.argv) > 1 else os.getenv("MODEL_NAME", "gemma4:e4b")
+MODEL = sys.argv[1] if len(sys.argv) > 1 else os.getenv("MODEL_NAME", "gemma4:e2b")
 
 schema = {
     "type": "object",
