@@ -7,6 +7,7 @@ import ErrorBanner from "../components/ErrorBanner";
 import GapChip from "../components/GapChip";
 import Loader from "../components/Loader";
 import RubricScoreCard from "../components/RubricScoreCard";
+import SpeakButton, { canSpeak, speak } from "../components/SpeakButton";
 import SubjectTile from "../components/SubjectTile";
 
 interface Turn {
@@ -25,6 +26,13 @@ export default function VivaPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const retryMode = params.get("concepts");
+  const [voiceOn, setVoiceOn] = useState(false);
+
+  // Examiner voice: automatically read each new question aloud when enabled.
+  const latestQuestion = turns.length ? turns[turns.length - 1].question : "";
+  useEffect(() => {
+    if (voiceOn && latestQuestion) speak(latestQuestion);
+  }, [voiceOn, latestQuestion]);
 
   const start = async (s: Subject, conceptIds?: string[]) => {
     setSubject(s);
@@ -103,9 +111,19 @@ export default function VivaPage() {
           <p className="text-sm font-semibold text-accent">{retryMode ? "Verify round · new question" : "Mock viva"}</p>
           <h1 className="text-3xl font-extrabold text-primary">{subject.title}</h1>
         </div>
-        <button className="btn-ghost" onClick={() => { setSubject(null); setSessionId(null); setTurns([]); }}>
-          Change subject
-        </button>
+        <div className="flex flex-wrap gap-2">
+          {canSpeak && (
+            <button
+              className={voiceOn ? "btn-primary" : "btn-ghost"}
+              onClick={() => { if (voiceOn) window.speechSynthesis.cancel(); setVoiceOn(!voiceOn); }}
+            >
+              {voiceOn ? "🔊 Examiner voice on" : "🔈 Examiner voice off"}
+            </button>
+          )}
+          <button className="btn-ghost" onClick={() => { setSubject(null); setSessionId(null); setTurns([]); }}>
+            Change subject
+          </button>
+        </div>
       </div>
 
       {turns.map((t, i) => (
@@ -117,6 +135,7 @@ export default function VivaPage() {
             <div className="rounded-2xl rounded-tl-none bg-primary p-4 font-medium text-white">
               {i > 0 && <span className="mb-1 block text-xs uppercase opacity-70">Follow-up</span>}
               {t.question}
+              <div><SpeakButton text={t.question} /></div>
             </div>
           </div>
           {t.answer && <div className="ml-auto max-w-[85%] rounded-2xl rounded-tr-none bg-lavender p-4">{t.answer}</div>}
