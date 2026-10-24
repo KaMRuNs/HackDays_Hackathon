@@ -22,7 +22,10 @@ export const api = {
   subjects: () => request<Subject[]>("/api/subjects"),
   startViva: (subject: string, concept_ids?: string[]) =>
     request<{ session_id: number; question: string; question_id: string }>("/api/viva/start", { subject, concept_ids }),
-  answerViva: (sessionId: number, text: string) =>
-    request<VivaTurnResult>(`/api/viva/${sessionId}/answer`, { text }),
+  answerViva: (sessionId: number, text: string, final = false) =>
+    request<VivaTurnResult>(`/api/viva/${sessionId}/answer`, { text, final }),
+  startInterview: (subject: string) =>
+    request<{ session_id: number; question: string; system_prompt: string; first_message: string }>(
+      "/api/interview/start", { subject }),
   gaps: () => request<Gap[]>("/api/gaps"),
 };

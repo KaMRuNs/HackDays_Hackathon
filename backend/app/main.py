@@ -7,7 +7,7 @@ from fastapi.responses import JSONResponse
 from .config import MODEL_NAME
 from .db import init_db
 from .model_client import ModelError, ModelTimeout
-from .routers import gaps, learn, viva
+from .routers import gaps, interview, learn, viva
 
 
 @asynccontextmanager
@@ -43,3 +43,4 @@ def health():
 app.include_router(learn.router)
 app.include_router(viva.router)
 app.include_router(gaps.router)
+app.include_router(interview.router)

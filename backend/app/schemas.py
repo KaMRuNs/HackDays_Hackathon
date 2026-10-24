@@ -69,7 +69,8 @@ class VivaStartRequest(BaseModel):
 
 
 class VivaAnswerRequest(BaseModel):
-    text: str = Field(min_length=1, max_length=3000)
+    text: str = Field(min_length=1, max_length=6000)
+    final: bool = False  # voice interview: grade the whole transcript once and finish
 
 
 # --- API responses ---

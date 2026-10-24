@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import GapsPage from "./pages/GapsPage";
 import HomePage from "./pages/HomePage";
+import InterviewPage from "./pages/InterviewPage";
 import LearnPage from "./pages/LearnPage";
 import VivaPage from "./pages/VivaPage";
 import "./index.css";
@@ -17,6 +18,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           <Route path="/" element={<HomePage />} />
           <Route path="/learn" element={<LearnPage />} />
           <Route path="/viva" element={<VivaPage />} />
+          <Route path="/interview" element={<InterviewPage />} />
           <Route path="/gaps" element={<GapsPage />} />
         </Routes>
       </main>

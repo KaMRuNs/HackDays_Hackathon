@@ -15,6 +15,7 @@ VivaBridge runs a closed learning loop:
 
 ## How it works
 - **Model:** [Gemma 4 E2B](https://ollama.com/library/gemma4) (`gemma4:e2b`, open-weight) via [Ollama](https://ollama.com), with structured JSON output. On a CPU laptop, `gemma4:e4b` took about 115 s per call versus about 30–60 s for E2B, so E2B is the default. Set `MODEL_NAME` to switch.
+- **Voice viva (optional):** [Vapi](https://vapi.ai) handles the phone-style call: speech-to-text (Deepgram) and the examiner's voice (Vapi voice). **These two speech services are closed/hosted.** The examiner's *thinking* (questions, follow-ups and grading) still runs on Gemma 4 via Vapi's `custom-llm` option, which calls our own `/api/vapi/chat/completions` endpoint. The text viva and all grading work without Vapi.
 - **Backend:** Python, FastAPI, Pydantic, SQLite
 - **Frontend:** React, Vite, TypeScript, Tailwind CSS, lucide-react
 - **Dataset:** a hand-written sample Computer Networks question bank with concept IDs and rubric notes (`backend/data/question_bank/`). It contains no real student data.
@@ -45,6 +46,11 @@ VivaBridge runs a closed learning loop:
 5. Open http://localhost:5173
 
 Optional: copy `.env.example` to `.env` to change `MODEL_NAME` or `OLLAMA_URL`.
+
+**Voice viva setup (optional):**
+1. Expose the backend publicly so Vapi's servers can reach it, e.g. `cloudflared tunnel --url http://localhost:8000`.
+2. Copy `frontend/.env.example` to `frontend/.env` and set `VITE_VAPI_PUBLIC_KEY` (Vapi **public** key only) and `VITE_PUBLIC_API_URL` (the tunnel URL).
+3. Restart `npm run dev` and open **Voice Viva**.
 
 ## Screenshots / demo
 _Coming soon: Home, Learn, Viva score card and My Gaps screenshots._

@@ -97,7 +97,7 @@ async def answer(session_id: int, req: VivaAnswerRequest) -> VivaTurnResult:
     )
     ev, total = normalize(raw, seed.concept_ids)
 
-    done = len(turns) >= MAX_TURNS or not ev.follow_up_question
+    done = req.final or len(turns) >= MAX_TURNS or not ev.follow_up_question
     with connect() as conn:
         conn.execute(
             "UPDATE turn SET answer_text = ?, rubric_result_json = ?, total = ? WHERE id = ?",
