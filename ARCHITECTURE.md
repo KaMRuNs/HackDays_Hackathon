@@ -144,7 +144,7 @@ missing/partial in viva ─▶ open ─▶ (learn check correct) ─▶ practice
                                                               │
        demonstrated on a question NOT previously seen  ◀──────┘ ─▶ resolved
 ```
-A gap is never resolved by a Learn check alone, and never by re-answering the same question.
+A gap is never resolved by a Learn check alone, and never by re-answering the same question. An `open` gap that is demonstrated on an unseen question also resolves, since that is the proof that matters.
 
 ### Question bank
 `data/question_bank/computer_networks.json` holds **sample** questions written for this project: at least 6 questions, with at least 2 per concept so retries can use an unseen question. Example concept IDs: `tcp_handshake`, `syn_flag`, `syn_ack`, `final_ack`, `nonce`, `subnet_mask`.

@@ -13,7 +13,7 @@ VivaBridge is an AI study coach for lab vivas: Learn → Prove → Diagnose → 
 ## Run
 ```bash
 # model (verify the exact tag first: ollama list / ollama.com/library)
-ollama pull gemma4            # fallback: ollama pull qwen2.5:3b
+ollama pull gemma4:e2b        # default (e4b is ~115 s/call on CPU, too slow)
 python backend/scripts/smoke_model.py
 
 # backend

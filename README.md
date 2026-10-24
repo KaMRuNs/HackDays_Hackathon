@@ -14,7 +14,7 @@ VivaBridge runs a closed learning loop:
 5. **Verify**: retry with a *new* question that covers the same concept. A gap is resolved only when you demonstrate it again.
 
 ## How it works
-- **Model:** Gemma 4 via [Ollama](https://ollama.com/library) (open-weight). *(Final tag confirmed during the build. If a fallback such as [Qwen 2.5](https://ollama.com/library/qwen2.5) is used, it is stated here.)*
+- **Model:** [Gemma 4 E2B](https://ollama.com/library/gemma4) (`gemma4:e2b`, open-weight) via [Ollama](https://ollama.com), with structured JSON output. On a CPU laptop, `gemma4:e4b` took about 115 s per call versus about 30–60 s for E2B, so E2B is the default. Set `MODEL_NAME` to switch.
 - **Backend:** Python, FastAPI, Pydantic, SQLite
 - **Frontend:** React, Vite, TypeScript, Tailwind CSS, lucide-react
 - **Dataset:** a hand-written sample Computer Networks question bank with concept IDs and rubric notes (`backend/data/question_bank/`). It contains no real student data.
@@ -27,7 +27,8 @@ VivaBridge runs a closed learning loop:
    ```
 2. Install [Ollama](https://ollama.com) and pull the model
    ```bash
-   ollama pull gemma4
+   ollama pull gemma4:e2b
+   python backend/scripts/smoke_model.py   # checks JSON output + speed
    ```
 3. Start the backend
    ```bash
@@ -52,7 +53,8 @@ _Coming soon: Home, Learn, Viva score card and My Gaps screenshots._
 - Only one subject (Computer Networks) in the sample question bank.
 - No voice input yet (Whisper is planned).
 - No user accounts. Progress is stored in a single local database.
-- AI scores are estimates to guide practice, not official marks.
+- AI scores are estimates to guide practice, not official marks. The small model is sometimes harsher than a human examiner (for example, it scores technical correctness low on short answers).
+- Each model call takes about 30–60 s on a CPU-only laptop. A GPU or a hosted Ollama server would make it feel instant.
 
 ## Credits
 - [Ollama](https://ollama.com), [Gemma](https://ai.google.dev/gemma) by Google
