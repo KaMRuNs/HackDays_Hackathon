@@ -1,0 +1,65 @@
+{
+  "subject": "computer_networks",
+  "title": "Computer Networks Lab",
+  "note": "Sample questions written for VivaBridge. No real exam data.",
+  "concepts": {
+    "syn": "Client sends a SYN segment with its initial sequence number to request a connection",
+    "syn_ack": "Server replies SYN-ACK: acknowledges the client's sequence number and sends its own",
+    "final_ack": "Client sends a final ACK so the server knows its SYN was received; only then is the connection established",
+    "sequence_numbers": "Each side picks an initial sequence number so bytes can be ordered and acknowledged",
+    "nonce": "A number used once, so old messages cannot be replayed",
+    "replay_attack": "An attacker re-sends a captured valid message to trick the receiver",
+    "subnet_mask": "Bits that separate the network part of an IP address from the host part",
+    "network_address": "The address that identifies the subnet itself, found by ANDing the IP with the mask"
+  },
+  "questions": [
+    {
+      "id": "cn_tcp_1",
+      "text": "Explain the TCP three-way handshake.",
+      "concept_ids": ["syn", "syn_ack", "final_ack"],
+      "rubric_notes": "Names the three steps in order (SYN, SYN-ACK, ACK), who sends each, and that the connection is established only after the final ACK."
+    },
+    {
+      "id": "cn_tcp_2",
+      "text": "Why does TCP need three messages to open a connection instead of two?",
+      "concept_ids": ["final_ack", "sequence_numbers"],
+      "rubric_notes": "Both sides must confirm the other's initial sequence number. With two messages the server never learns whether its SYN reached the client. It also prevents stale duplicate connection requests."
+    },
+    {
+      "id": "cn_tcp_3",
+      "text": "What is the role of sequence numbers during TCP connection establishment?",
+      "concept_ids": ["sequence_numbers", "syn", "syn_ack"],
+      "rubric_notes": "Each side chooses an initial sequence number and sends it in its SYN; the other side acknowledges ISN+1. This enables ordering and reliable delivery."
+    },
+    {
+      "id": "cn_tcp_4",
+      "text": "A client sends SYN and receives SYN-ACK, but its final ACK is lost. What happens?",
+      "concept_ids": ["final_ack", "syn_ack"],
+      "rubric_notes": "The server stays in SYN-RECEIVED (half-open) and retransmits SYN-ACK after a timeout. The connection is not established on the server side until an ACK arrives."
+    },
+    {
+      "id": "cn_sec_1",
+      "text": "What is a nonce and why is it used in network security protocols?",
+      "concept_ids": ["nonce", "replay_attack"],
+      "rubric_notes": "A number used only once (random or a counter). It makes each message fresh so a captured message cannot be replayed."
+    },
+    {
+      "id": "cn_sec_2",
+      "text": "How can an attacker perform a replay attack, and how does a protocol defend against it?",
+      "concept_ids": ["replay_attack", "nonce"],
+      "rubric_notes": "The attacker records a valid message and re-sends it later. Defences include nonces, timestamps or sequence numbers so the receiver rejects repeats."
+    },
+    {
+      "id": "cn_ip_1",
+      "text": "What is a subnet mask, and how do you find the network address of 192.168.10.37/24?",
+      "concept_ids": ["subnet_mask", "network_address"],
+      "rubric_notes": "The mask 255.255.255.0 separates network and host bits. AND the IP with the mask to get 192.168.10.0."
+    },
+    {
+      "id": "cn_ip_2",
+      "text": "Why do two hosts need to know whether they are on the same subnet?",
+      "concept_ids": ["subnet_mask", "network_address"],
+      "rubric_notes": "A host compares network addresses (IP AND mask). On the same network it delivers directly; otherwise it sends to the default gateway (router)."
+    }
+  ]
+}

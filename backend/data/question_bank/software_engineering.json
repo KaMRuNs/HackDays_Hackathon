@@ -1,0 +1,37 @@
+{
+  "subject": "software_engineering",
+  "title": "Software Engineering Lab",
+  "note": "Sample questions written for VivaBridge. No real exam data.",
+  "concepts": {
+    "unit_test": "A test that checks one small unit of code in isolation",
+    "integration_test": "A test that checks that multiple components work together",
+    "waterfall": "Sequential phases; each finishes before the next starts; late changes are costly",
+    "agile": "Short iterative cycles that deliver working software and gather feedback each sprint"
+  },
+  "questions": [
+    {
+      "id": "se_test_1",
+      "text": "What is the difference between unit testing and integration testing?",
+      "concept_ids": ["unit_test", "integration_test"],
+      "rubric_notes": "Unit = one function or class in isolation (often with mocks); integration = components together (e.g. API + database). Unit tests are faster and run more often."
+    },
+    {
+      "id": "se_test_2",
+      "text": "Why might all unit tests pass but the application still fail?",
+      "concept_ids": ["integration_test", "unit_test"],
+      "rubric_notes": "Units are tested in isolation with mocks, so bugs in interfaces, configuration or data contracts only appear when components are combined. Integration tests catch these."
+    },
+    {
+      "id": "se_proc_1",
+      "text": "Compare the Waterfall and Agile development models.",
+      "concept_ids": ["waterfall", "agile"],
+      "rubric_notes": "Waterfall: linear phases, fixed requirements, late testing. Agile: iterations or sprints, changing requirements welcome, continuous feedback."
+    },
+    {
+      "id": "se_proc_2",
+      "text": "For a university app whose requirements keep changing, would you choose Waterfall or Agile? Why?",
+      "concept_ids": ["agile", "waterfall"],
+      "rubric_notes": "Agile, because iterations absorb changing requirements and bring early user feedback; in Waterfall late changes are expensive."
+    }
+  ]
+}
