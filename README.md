@@ -50,7 +50,7 @@ Optional: copy `.env.example` to `.env` to change `MODEL_NAME` or `OLLAMA_URL`.
 _Coming soon: Home, Learn, Viva score card and My Gaps screenshots._
 
 ## What's not done yet
-- Only one subject (Computer Networks) in the sample question bank.
+- Only two subjects (Computer Networks, Software Engineering) with small sample question banks.
 - Examiner voice uses the browser's built-in speech synthesis (Web Speech API, no API key or external model). Spoken answers (Whisper) are not done yet.
 - No user accounts. Progress is stored in a single local database.
 - AI scores are estimates to guide practice, not official marks. The small model is sometimes harsher than a human examiner (for example, it scores technical correctness low on short answers).
